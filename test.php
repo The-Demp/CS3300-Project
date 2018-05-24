@@ -6,7 +6,7 @@
 </head>
 <body>
 	<label for='states'>Pick a state:</label>
-	<?php renderDropdown($conn, "states", "STATE"); ?>
+	<?php renderDropdown($conn, "states", "STATE", "STATE_CODE"); ?>
 </body>
 </html>
 <?php include 'sql-end.php'; ?>
