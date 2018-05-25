@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Application Information</title>
+	<?php movePostToSession(); ?>
 </head>
 <body>
 	<h1>Application Information</h1>

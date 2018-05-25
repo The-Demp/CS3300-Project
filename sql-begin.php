@@ -12,4 +12,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
+//also fire up a session to hold variables between pages
+session_start();
 ?>

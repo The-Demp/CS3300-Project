@@ -1,4 +1,10 @@
 <?php
+function movePostToSession() {
+	foreach($_POST as $name => $value) {
+		$_SESSION[$name] = $_POST[$name];
+	}
+}
+
 function renderDropdown($conn, $elementId, $tableName, $sortCol=null) {
 	echo "<select id='$elementId' name='$elementId'>\n";
 	

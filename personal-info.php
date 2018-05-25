@@ -3,6 +3,8 @@
 <html>
 <head>
 	<title>Personal Information</title>
+	<!--use this area to copy POST data to session-->
+	<?php movePostToSession(); ?>
 </head>
 <body>
 	<h1>Personal Information</h1>
