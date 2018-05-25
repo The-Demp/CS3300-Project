@@ -1,6 +1,6 @@
 <?php
 function renderDropdown($conn, $elementId, $tableName, $sortCol=null) {
-	echo "<select id='$elementId'>\n";
+	echo "<select id='$elementId' name='$elementId'>\n";
 	
 	$queryStr = "SELECT * FROM $tableName";
 	if(isset($sortCol)) {
@@ -14,5 +14,10 @@ function renderDropdown($conn, $elementId, $tableName, $sortCol=null) {
 	}
 	echo "</select>\n";
 	mysqli_free_result($result);
+}
+
+function renderYesNo($elementId) {
+	echo "<input type='radio' name='$elementId' value='Yes'>Yes</input><br/>\n";
+	echo "<input type='radio' name='$elementId' value='No' checked>No</input><br/>\n";
 }
 ?>
