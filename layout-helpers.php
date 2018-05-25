@@ -5,6 +5,21 @@ function movePostToSession() {
 	}
 }
 
+function renderYearSelector($elementId) {
+	$curYear = date("Y");
+	for($i = 0; $i < 3; $i++) {
+		$value = $curYear + $i;
+		if($i == 0) {
+			echo "<input type='radio' name='$elementId' value='$value' checked>$value</input><br/>";
+		}
+		else {
+			echo "<input type='radio' name='$elementId' value='$value'>$value</input><br/>";
+		}
+	}
+	
+	echo "</select>\n";
+}
+
 function renderDropdown($conn, $elementId, $tableName, $sortCol=null) {
 	echo "<select id='$elementId' name='$elementId'>\n";
 	

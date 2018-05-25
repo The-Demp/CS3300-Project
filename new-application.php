@@ -25,8 +25,11 @@
 			<?php renderDropdown($conn, "major", "DEGREE"); ?>
 		</p>
 		<p>
-			<label for="term">Which term are you applying for (*)?</label>
-			<?php renderDropdown($conn, "term", "TERM"); ?>
+			Which term are you applying for (*)?</br>
+			<label for="season">Season (*):</label>
+			<?php renderDropdown($conn, "season", "SEASON"); ?>
+			Year (*):</br>
+			<?php renderYearSelector("year"); ?>
 		</p>
 		<button type="button" onclick="window.location='new-application.php';">Cancel</button>
 		<input type="submit" value="Next ->"/>
