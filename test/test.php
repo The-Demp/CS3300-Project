@@ -1,5 +1,5 @@
-<?php include 'sql-begin.php'; ?>
-<?php include 'layout-helpers.php'; ?>
+<?php include '..\sql-begin.php'; ?>
+<?php include '..\layout-helpers.php'; ?>
 <html>
 <head>
 	<title>Test things</title>
@@ -24,4 +24,4 @@
 	</form>
 </body>
 </html>
-<?php include 'sql-end.php'; ?>
+<?php include '..\sql-end.php'; ?>
