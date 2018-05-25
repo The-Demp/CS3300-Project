@@ -12,9 +12,10 @@
 		You'll be contacted shortly with next steps.
 	</p>
 	<!--This is just debug info and will be formatted better when actually dealing with MySQL-->
+	<!--
 	<p>
 		<?php
-		foreach( $_SESSION as $name => $value) {
+		foreach($_SESSION as $name => $value) {
 			if(is_array($value)) {
 				echo $name . ": [";
 				foreach($value as $arrElement) {
@@ -27,7 +28,7 @@
 			}
 		}
 		?>
-	</p>
+	</p>-->
 	<p>
 		Click <a href="new-application.php">here</a> to return to the homepage.
 	</p>

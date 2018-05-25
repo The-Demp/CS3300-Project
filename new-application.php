@@ -27,7 +27,7 @@
 		<p>
 			Which term are you applying for (*)?</br>
 			<label for="season">Season (*):</label>
-			<?php renderDropdown($conn, "season", "SEASON"); ?>
+			<?php renderDropdown($conn, "season", "SEASON"); ?><br/>
 			Year (*):</br>
 			<?php renderYearSelector("year"); ?>
 		</p>
