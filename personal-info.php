@@ -7,7 +7,7 @@
 <body>
 	<h1>Personal Information</h1>
 	<p style="color:red">A * next to a field indicates it is required.</p>
-	<form action="test/testsubmit.php" method="post">
+	<form action="application-info.php" method="post">
 		<p>
 			First Name (*):<br/>
 			<input type="text" name="fName"/>
