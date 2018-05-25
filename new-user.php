@@ -14,11 +14,11 @@
 		</p>
 		<p>
 			Password (*):<br/>
-			<input type="text" name="pass"/>
+			<input type="password" name="pass"/>
 		</p>
 		<p>
 			Confirm password (*):<br/>
-			<input type="text" name="confirmPass"/>
+			<input type="password" name="confirmPass"/>
 		</p>
 		<button type="button" onclick="window.location='new-application.php';">Cancel</button>
 		<input type="submit" value="Register"/>

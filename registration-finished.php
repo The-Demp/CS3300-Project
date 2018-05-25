@@ -8,11 +8,16 @@
 <body>
 	<h1>
 	<?php 
-	if($_POST["pass"] == $_POST["passConfirm"]) {
+	if($_POST["pass"] == $_POST["confirmPass"]) {
 		$sql = mysqli_prepare($conn, PreparedQuery::NEW_USER);
-		mysqli_stmt_bind_param($sql, "ss", $_POST["email"], hash("sha256", $_POST["pass"]));
-		if(!mysqli_stmt_execute($sql)) {
-			die(mysqli_error());
+		if(!sql) {
+			echo mysqli_error($conn);
+		}
+		if(mysqli_stmt_bind_param($sql, "ss", $_POST["email"], hash("sha256", $_POST["pass"]))) {
+			echo mysqli_stmt_error($sql);
+		}
+		if(mysqli_stmt_execute($sql)) {
+			echo mysqli_error($conn);
 		}
 		echo "Registration Successful!";
 	}
