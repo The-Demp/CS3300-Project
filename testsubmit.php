@@ -5,7 +5,16 @@
 <body>
 <?php
 foreach( $_POST as $name => $value) {
-	echo $name . ": " . $value . "<br/>\n";
+	if(is_array($value)) {
+		echo $name . ": [";
+		foreach($value as $arrElement) {
+			echo "$arrElement" . ", ";
+		}
+		echo "]</br>";
+	}
+	else {
+		echo $name . ": " . $value . "<br/>\n";
+	}
 }
 ?>
 </body>

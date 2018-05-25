@@ -16,6 +16,10 @@
 			Yes or no #2<br/>
 			<?php renderYesNo("Group2"); ?>
 		</p>
+		<p>
+			Pick military branches<br/>
+			<?php renderSelectMany($conn, "branches", "MILITARY_BRANCH"); ?>
+		</p>
 		<input type="submit" value="Submit"/>
 	</form>
 </body>
