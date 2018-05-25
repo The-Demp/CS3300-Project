@@ -7,7 +7,7 @@
 <body>
 	<h1>Application Information</h1>
 	<p style="color:red">A * next to a field indicates it is required.</p>
-	<form action="test/testsubmit.php" method="post">
+	<form action="confirmation.php" method="post">
 		<p>
 			Will you be applying for financial aid (*)?<br/>
 			<?php renderYesNo("finAid"); ?>
