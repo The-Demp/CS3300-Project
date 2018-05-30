@@ -2,6 +2,7 @@
 
 class PreparedQuery {
 	const NEW_USER = "INSERT INTO APPLICANT(EMAIL, PASSWORD_HASH) VALUES(?, ?);";
+	const GET_APPS = "SELECT * FROM APPLICATION WHERE APPLICANT_ID = ?;";
 }
 
 ?>

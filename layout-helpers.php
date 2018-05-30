@@ -5,6 +5,36 @@ function movePostToSession() {
 	}
 }
 
+function createApplicationTable($conn, $userid) {
+	if(!$userid) {
+		echo "You're not logged in!";
+		return null;
+	}
+	$sql = mysqli_prepare($conn, PreparedQuery::GET_APPS);
+	if(!sql) {
+		echo mysqli_error($conn);
+	}
+	if(mysqli_stmt_bind_param($sql, "i", $userid)) {
+		echo mysqli_stmt_error($sql);
+	}
+	if(mysqli_stmt_execute($sql)) {
+		echo mysqli_error($conn);
+	}
+	mysqli_stmt_bind_result($sql, $appId, $colId, $degId, $degType,
+		$applicantId, $termId, $studentType, $persInfo, $appInfo);
+	echo "<table><tr><th>App ID</th><th>College</th><th>Degree</th><th>Major</th><th>Term</th></tr>\n";
+	$count = 0;
+	while (mysqli_stmt_fetch($sql)) {
+		//todo: more queries to get text data for enum types
+		echo "<tr><td><a href='confirmation.php?appid=$appId>$appId</a></td><td>$colId</td><td>$degType</td><td>$degId</td><td>$termId</td></tr>\n";
+		$count = $count + 1;
+	}
+	echo "</table>";
+	if($count == 0) {
+		echo "It's empty in here :(";
+	}
+}
+
 function renderYearSelector($elementId) {
 	$curYear = date("Y");
 	for($i = 0; $i < 3; $i++) {
