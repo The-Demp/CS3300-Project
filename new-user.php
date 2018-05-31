@@ -20,7 +20,7 @@
 			Confirm password (*):<br/>
 			<input type="password" name="confirmPass"/>
 		</p>
-		<button type="button" onclick="window.location='new-application.php';">Cancel</button>
+		<button type="button" onclick="window.location='login.php';">Cancel</button>
 		<input type="submit" value="Register"/>
 	</form>
 </body>

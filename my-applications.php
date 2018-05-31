@@ -9,7 +9,7 @@
 	<h1>
 	<?php
 		if(array_key_exists("user", $_SESSION)) {
-			echo "you're logged in but I don't know who you are yet " . $_SESSION['user'];
+			echo "Welcome, " . $_SESSION['email'];
 		}
 		else {
 			echo "This is a little strange because you're not logged in!";
