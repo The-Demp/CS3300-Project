@@ -31,7 +31,7 @@
 			Year (*):</br>
 			<?php renderYearSelector("year"); ?>
 		</p>
-		<button type="button" onclick="window.location='new-application.php';">Cancel</button>
+		<button type="button" onclick="window.location='my-applications.php';">Cancel</button>
 		<input type="submit" value="Next ->"/>
 	</form>
 </body>

@@ -19,7 +19,7 @@
 	<p>
 		Click an application below to review it, or <a href="new-application.php">create a new one</a>.
 	</p>
-	<?php createApplicationTable($conn, $_SESSION["user"]); ?>
+	<?php createApplicationTable($conn, $_SESSION['user']); ?>
 </body>
 </html>
 <?php include 'sql-end.php'; ?>

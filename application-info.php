@@ -32,7 +32,7 @@
 			otherwise sanctioned by (for any period of time) any higher education institution (*)?<br/>
 			<?php renderYesNo("probation"); ?>
 		</p>
-		<button type="button" onclick="window.location='new-application.php';">Cancel</button>
+		<button type="button" onclick="window.location='my-applications.php';">Cancel</button>
 		<input type="submit" value="Next ->"/>
 	</form>
 </body>

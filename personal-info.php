@@ -74,7 +74,7 @@
 			Which race/ethnicity do you identify as (select all that apply)?<br/>
 			<?php renderSelectMany($conn, "race", "RACE"); ?>
 		</p>
-		<button type="button" onclick="window.location='new-application.php';">Cancel</button>
+		<button type="button" onclick="window.location='my-applications.php';">Cancel</button>
 		<input type="submit" value="Next ->"/>
 	</form>
 </body>
