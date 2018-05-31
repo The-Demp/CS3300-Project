@@ -22,7 +22,7 @@ function createApplicationTable($conn, $userid) {
 	}
 	mysqli_stmt_bind_result($sql, $appId, $colId, $degId, $degType,
 		$applicantId, $termId, $studentType, $persInfo, $appInfo);
-	echo "<table><tr><th>App ID</th><th>College</th><th>Degree</th><th>Major</th><th>Term</th></tr>\n";
+	echo "<table border='1'><tr><th>App ID</th><th>College</th><th>Degree</th><th>Major</th><th>Term</th></tr>\n";
 	$count = 0;
 	while (mysqli_stmt_fetch($sql)) {
 		//todo: more queries to get text data for enum types
