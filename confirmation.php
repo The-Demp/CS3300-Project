@@ -11,6 +11,7 @@
 		Thanks for <s>selling your soul to us</s> completing your application!<br/>
 		You'll be contacted shortly with next steps.
 	</p>
+	<!--We can check $_SERVER["REQUEST_METHOD"]. If it's GET, we only need to get data. If it's POST, we need to add AND get data
 	<!--This is just debug info and will be formatted better when actually dealing with MySQL-->
 	<!--
 	<p>
