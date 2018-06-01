@@ -18,11 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	while (mysqli_stmt_fetch($sql)) {
 		$count = $count + 1;
 	}
+	mysqli_stmt_close($sql);
 	if($count > 0) {
 		$_SESSION['user'] = $userid;
 		$_SESSION['email'] = $userEmail;
-		//echo "<script type='text/javascript'>window.location='my-applications.php';</script>";
+		//this is critical. The header must be the first and only output, 
+		//so this goes BEFORE the <html> tag and then we call exit() to stop further output.
 		header("location:my-applications.php");
+		//since we're ending this prematurely, we need to close off the sql!
+		include 'sql-end.php';
 		exit();
 	}
 }
@@ -49,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</p>
 		<input type="submit" value="Login"/>
 	</form>
-	<p>New here? <a href="new-user.php">Create an account</a>.</p>
+	<p>New here? <a href="new-user.php">Create an account</a>!</p>
 </body>
 </html>
 <?php include 'sql-end.php'; ?>

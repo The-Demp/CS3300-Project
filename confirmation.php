@@ -31,7 +31,7 @@
 		?>
 	</p>-->
 	<p>
-		Click <a href="new-application.php">here</a> to return to the homepage.
+		Click <a href="my-applications.php">here</a> to return to the homepage.
 	</p>
 </body>
 </html>

@@ -13,13 +13,16 @@
 		if(!sql) {
 			echo mysqli_error($conn);
 		}
-		if(mysqli_stmt_bind_param($sql, "ss", $_POST["email"], hash("sha256", $_POST["pass"]))) {
-			echo mysqli_stmt_error($sql);
+		mysqli_stmt_bind_param($sql, "ss", $_POST["email"], hash("sha256", $_POST["pass"]));
+		if(!mysqli_stmt_execute($sql)) {
+			//the feasible error here is bad username
+			//echo mysqli_error($conn);
+			echo "A user with that name already exists!";
 		}
-		if(mysqli_stmt_execute($sql)) {
-			echo mysqli_error($conn);
+		else {
+			echo "Registration Successful!";
 		}
-		echo "Registration Successful!";
+		mysqli_stmt_close($sql);
 	}
 	else {
 		echo "Registration Failed!";

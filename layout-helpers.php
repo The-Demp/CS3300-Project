@@ -30,6 +30,7 @@ function createApplicationTable($conn, $userid) {
 		$count = $count + 1;
 	}
 	echo "</table>";
+	mysqli_stmt_close($sql);
 	if($count == 0) {
 		echo "It's empty in here :(";
 	}
