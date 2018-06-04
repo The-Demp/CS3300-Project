@@ -26,10 +26,10 @@ function createApplicationTable($conn, $userid) {
 	$count = 0;
 	while (mysqli_stmt_fetch($sql)) {
 		//todo: more queries to get text data for enum types
-		echo "<tr><td><a href='confirmation.php?appid=$appId>$appId</a></td><td>$colId</td><td>$degType</td><td>$degId</td><td>$termId</td></tr>\n";
+		echo "<tr><td><a href='confirmation.php?app=$appId'>$appId</a></td><td>$colId</td><td>$degType</td><td>$degId</td><td>$termId</td></tr>\n";
 		$count = $count + 1;
 	}
-	echo "</table>";
+	echo "</table>\n";
 	mysqli_stmt_close($sql);
 	if($count == 0) {
 		echo "It's empty in here :(";
