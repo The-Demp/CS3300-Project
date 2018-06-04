@@ -7,6 +7,7 @@ class PreparedQuery {
 	
 	//A big gross join that gets everything you could ever hope to know about the APPLICATION from the table
 	//Presently, * is a placeholder. We actually should filter to only the relevant data, i.e. no PKs are needed here
+	//We actually need PERS_INFO_ID to be able to get military branches, races.
 	const READ_APP = <<<BIG_ICKY_JOIN
 		SELECT * FROM APPLICATION A
 		NATURAL JOIN DEGREE D
@@ -18,12 +19,9 @@ class PreparedQuery {
 		NATURAL JOIN PERSONAL_INFO PI
 		NATURAL JOIN STATE S
 		NATURAL JOIN VET_STATUS VS
-		NATURAL JOIN APP_MILITARY_BRANCH
-		NATURAL JOIN MILITARY_BRANCH MB
-		NATURAL JOIN APP_RACE
-		NATURAL JOIN RACE R
 		WHERE APP_ID = ?;
 BIG_ICKY_JOIN;
+	//also need queries for military branches, races.
 	
 	//This is heredoc syntax; it allows strings over multiple lines.
 	//the identifier NEEDS to be the first thing on the last line or THERE WILL BE ERRORS!
