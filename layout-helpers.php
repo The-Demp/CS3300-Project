@@ -20,13 +20,20 @@ function createApplicationTable($conn, $userid) {
 	if(mysqli_stmt_execute($sql)) {
 		echo mysqli_error($conn);
 	}
-	mysqli_stmt_bind_result($sql, $appId, $colId, $degId, $degType,
-		$applicantId, $termId, $studentType, $persInfo, $appInfo);
+	mysqli_stmt_bind_result($sql, $appId, $colName, $degName, $degType, $termYear, $season);
 	echo "<table border='1'><tr><th>App ID</th><th>College</th><th>Degree</th><th>Major</th><th>Term</th></tr>\n";
 	$count = 0;
 	while (mysqli_stmt_fetch($sql)) {
 		//todo: more queries to get text data for enum types
-		echo "<tr><td><a href='confirmation.php?app=$appId'>$appId</a></td><td>$colId</td><td>$degType</td><td>$degId</td><td>$termId</td></tr>\n";
+		echo <<<TABLE_ENTRY
+			<tr>
+				<td><a href='confirmation.php?app=$appId'>$appId</a></td>
+				<td>$colName</td>
+				<td>$degType</td>
+				<td>$degName</td>
+				<td>$season $termYear</td>
+			</tr>
+TABLE_ENTRY;
 		$count = $count + 1;
 	}
 	echo "</table>\n";

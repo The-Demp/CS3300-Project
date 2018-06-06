@@ -3,7 +3,17 @@
 class PreparedQuery {
 	const NEW_USER = "INSERT INTO APPLICANT(EMAIL, PASSWORD_HASH) VALUES(?, ?);";
 	const VERIFY_USER = "SELECT APPLICANT_ID, EMAIL FROM APPLICANT WHERE EMAIL=? AND PASSWORD_HASH=?;";
-	const GET_APPS = "SELECT * FROM APPLICATION WHERE APPLICANT_ID = ?;";
+	const GET_APPS = <<<GETAPPS
+		SELECT A.APP_ID, C.COL_NAME, D.DEG_NAME, DT.DEG_DESC, T.TERM_YEAR, S.SEASON_DESC
+		FROM APPLICATION A
+		NATURAL JOIN COLLEGE C
+		NATURAL JOIN DEGREE D
+		NATURAL JOIN DEGREE_TYPE DT
+		NATURAL JOIN TERM T
+		NATURAL JOIN SEASON S
+		WHERE APPLICANT_ID = ?
+		ORDER BY APP_ID;
+GETAPPS;
 	
 	//A big gross join that gets everything you could ever hope to know about the APPLICATION from the table
 	//Presently, * is a placeholder. We actually should filter to only the relevant data, i.e. no PKs are needed here
@@ -19,7 +29,7 @@ class PreparedQuery {
 		NATURAL JOIN PERSONAL_INFO PI
 		NATURAL JOIN STATE S
 		NATURAL JOIN VET_STATUS VS
-		WHERE APP_ID = ?;
+		WHERE APP_ID = ? AND APPLICANT_ID = ?;
 BIG_ICKY_JOIN;
 	//also need queries for military branches, races.
 	
@@ -40,7 +50,7 @@ PERSINF;
 	//Call mysqli_insert_id($conn) to get PERS_INFO_ID for children and for the application
 	const BIND_RACE = "INSERT INTO APP_RACE(PERS_INFO_ID, RACE_ID) VALUES(?, ?);";
 	const BIND_BRANCH = "INSERT INTO APP_MILITARY_BRANCH(PERS_INFO_ID, BRANCH_ID) VALUES(?, ?);";
-	//lookup term id based on Season, Year
+	const GET_TERM_ID = "SELECT TERM_ID FROM TERM WHERE TERM_YEAR = ? AND SEASON_ID = ?;";
 	//We have everything we need here. This is the point where we can make the real APPLICATION
 	const INSERT_APP = <<<APP
 		INSERT INTO APPLICATION(APPLICANT_ID, PERS_INFO_ID, APP_INFO_ID, COL_ID, DEG_ID, DEG_TYPE_ID,

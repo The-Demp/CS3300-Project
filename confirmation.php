@@ -51,11 +51,17 @@
 		}
 		mysqli_stmt_close($sql);
 		
+		//step 3.5: Get the term ID real quicklike
+		$sql = mysqli_prepare($conn, PreparedQuery::GET_TERM_ID);
+		mysqli_stmt_bind_param($sql, "ii", $year, $season);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_bind_result($sql, $term);
+		mysqli_stmt_fetch($sql);
+		mysqli_stmt_close($sql);
+		
 		//step 4: now put it all together!
 		$sql = mysqli_prepare($conn, PreparedQuery::INSERT_APP);
-		//todo: handle term, for now just use 1
-		$testTerm = 3;
-		mysqli_stmt_bind_param($sql, "iiiiiiii", $user, $persInfoID, $appInfoID, $college, $major, $degreeType, $testTerm, $studentType);
+		mysqli_stmt_bind_param($sql, "iiiiiiii", $user, $persInfoID, $appInfoID, $college, $major, $degreeType, $term, $studentType);
 		mysqli_stmt_execute($sql);
 		mysqli_stmt_close($sql);
 		$appID = mysqli_insert_id($conn);
