@@ -71,7 +71,10 @@
 		echo "<p>New app</p>";
 	}
 	else {
+		//assume we're getting here with an actual parameter. that's fine
 		$appID = $_GET["app"];
+		
+		renderAppSummary($conn, $appID, $_SESSION["user"]);
 	}
 	echo "<p>Reviewing app# $appID</p>";
 	?>

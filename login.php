@@ -30,6 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		exit();
 	}
 }
+else {
+	if(array_key_exists("logout", $_GET)) {
+		//we're logging out!
+		unset($_SESSION['user']);
+		unset($_SESSION['email']);
+		$loggedOut = true;
+	}
+}
 ?>
 <html>
 <head>
@@ -40,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<?php 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "<p>Login failed!</p>";
+	}
+	if ($loggedOut) {
+		echo "<p>Logged out successfully.</p>";
 	}
 	?>
 	<form action="login.php" method="post">

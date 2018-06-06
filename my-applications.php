@@ -20,6 +20,9 @@
 		Click an application below to review it, or <a href="new-application.php">create a new one</a>.
 	</p>
 	<?php createApplicationTable($conn, $_SESSION['user']); ?>
+	<p>
+		Don't forget to <a href="login.php?logout">log out</a> when you're done!
+	</p>
 </body>
 </html>
 <?php include 'sql-end.php'; ?>

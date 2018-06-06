@@ -5,6 +5,25 @@ function movePostToSession() {
 	}
 }
 
+function renderAppSummary($conn, $appid, $userid) {
+	$sql = mysqli_prepare($conn, PreparedQuery::READ_APP);
+	mysqli_stmt_bind_param($sql, "ii", $appid, $userid);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_bind_result($sql, $studentType, $college, $degType, $degree, $termId,
+		$personalInfo, $fName, $lName, $prefName, $dob, $addr, $city, $state, $zip, $phone, 
+		$usCitizen, $engNative, $gender, $vetStatus, $hispLat,
+		$finAid, $tuitionAsst, $otherPrograms, $felony, $probation);
+	$gotResults = mysqli_stmt_fetch($sql);
+	mysqli_stmt_close($sql);
+	if($gotResults) {
+		//do output
+	}
+	else {
+		//no results; either app doesn't exist or someone is trying to hax
+		echo '<p style="color:red">This application doesn\'t belong to you!</p>';
+	}
+}
+
 function createApplicationTable($conn, $userid) {
 	if(!$userid) {
 		echo "You're not logged in!";
@@ -21,7 +40,7 @@ function createApplicationTable($conn, $userid) {
 		echo mysqli_error($conn);
 	}
 	mysqli_stmt_bind_result($sql, $appId, $colName, $degName, $degType, $termYear, $season);
-	echo "<table border='1'><tr><th>App ID</th><th>College</th><th>Degree</th><th>Major</th><th>Term</th></tr>\n";
+	echo "<table border='1' cellpadding='5'><tr><th>App ID</th><th>College</th><th>Degree</th><th>Major</th><th>Term</th></tr>\n";
 	$count = 0;
 	while (mysqli_stmt_fetch($sql)) {
 		//todo: more queries to get text data for enum types
