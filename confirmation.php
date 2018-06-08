@@ -68,15 +68,13 @@
 		
 		//end the transaction, everything is good
 		mysqli_commit($conn);
-		echo "<p>New app</p>";
 	}
 	else {
 		//assume we're getting here with an actual parameter. that's fine
 		$appID = $_GET["app"];
-		
-		renderAppSummary($conn, $appID, $_SESSION["user"]);
 	}
-	echo "<p>Reviewing app# $appID</p>";
+		
+	renderAppSummary($conn, $appID, $_SESSION["user"]);
 	?>
 	<p>
 		Click <a href="my-applications.php">here</a> to return to the homepage.

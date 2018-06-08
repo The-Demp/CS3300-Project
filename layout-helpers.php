@@ -23,7 +23,7 @@ function renderAppSummary($conn, $appid, $userid) {
 		//do output
 		//new application
 		echo "<h2>New Application</h2>\n";
-		echo "<table cellpadding='10'>";
+		echo "<table cellpadding='7'>";
 		makeSummaryEntry("Which type of student are you?", $studentType);
 		makeSummaryEntry("Which college are you applying to?", $college);
 		makeSummaryEntry("What type of degree are you applying for?", $degType);
@@ -32,7 +32,7 @@ function renderAppSummary($conn, $appid, $userid) {
 		
 		//personal info
 		echo "<h2>Personal Information</h2>\n";
-		echo "<table cellpadding='10'>";
+		echo "<table cellpadding='7'>";
 		makeSummaryEntry("First name:", $fName);
 		makeSummaryEntry("Last name:", $lName);
 		makeSummaryEntry("Preferred name:", $prefName);
@@ -48,14 +48,34 @@ function renderAppSummary($conn, $appid, $userid) {
 		makeSummaryEntry("Is English your native language?", $engNative);
 		makeSummaryEntry("What is your gender?", $gender);
 		makeSummaryEntry("What is your veteran status?", $vetStatus);
-		makeSummaryEntry("If applicable, which military branch(es) have you served for (select all that apply)?", null); //query for branches list
+		//do the query for military branches
+		$sql = mysqli_prepare($conn, PreparedQuery::GET_MILITARY_BRANCHES);
+		mysqli_stmt_bind_param($sql, "i", $personalInfo);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_bind_result($sql, $branchName);
+		$branches = array();
+		while(mysqli_stmt_fetch($sql)) {
+			array_push($branches, $branchName);
+		}
+		mysqli_stmt_close($sql);
+		makeSummaryEntry("Which military branch(es) have you served for?", join(", ", array_reverse($branches)));
 		makeSummaryEntry("Are you Hispanic/Latino origin?", $hispLat);
-		makeSummaryEntry("Which race/ethnicity do you identify as (select all that apply)?", null); //query for races
+		//do the query for race/ethnicity
+		$sql = mysqli_prepare($conn, PreparedQuery::GET_RACES);
+		mysqli_stmt_bind_param($sql, "i", $personalInfo);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_bind_result($sql, $race);
+		$races = array();
+		while(mysqli_stmt_fetch($sql)) {
+			array_push($races, $race);
+		}
+		mysqli_stmt_close($sql);
+		makeSummaryEntry("Which race/ethnicity do you identify as?", join(", ", array_reverse($races))); //query for races
 		echo "</table>\n";
 		
 		//application info
 		echo "<h2>Application Info</h2>\n";
-		echo "<table cellpadding='10'>";
+		echo "<table cellpadding='7'>";
 		makeSummaryEntry("Will you be applying for financial aid?", $finAid);
 		makeSummaryEntry("Do you have employer tuition assistance?", $tuitionAsst);
 		makeSummaryEntry("Are you applying to other programs?", $otherPrograms);
