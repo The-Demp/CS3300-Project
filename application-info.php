@@ -14,7 +14,7 @@
 			<?php renderYesNo("finAid"); ?>
 		</p>
 		<p>
-			Do you have employer tuition assistance? (*)?<br/>
+			Do you have employer tuition assistance (*)?<br/>
 			<?php renderYesNo("tuitionAsst"); ?>
 		</p>
 		<p>

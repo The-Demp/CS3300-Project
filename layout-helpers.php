@@ -5,11 +5,15 @@ function movePostToSession() {
 	}
 }
 
+function makeSummaryEntry($label, $value) {
+	echo "<tr><td>$label</td><td>$value</td></tr>\n";
+}
+
 function renderAppSummary($conn, $appid, $userid) {
 	$sql = mysqli_prepare($conn, PreparedQuery::READ_APP);
 	mysqli_stmt_bind_param($sql, "ii", $appid, $userid);
 	mysqli_stmt_execute($sql);
-	mysqli_stmt_bind_result($sql, $studentType, $college, $degType, $degree, $termId,
+	mysqli_stmt_bind_result($sql, $studentType, $college, $degType, $degree, $termYear, $termSeason,
 		$personalInfo, $fName, $lName, $prefName, $dob, $addr, $city, $state, $zip, $phone, 
 		$usCitizen, $engNative, $gender, $vetStatus, $hispLat,
 		$finAid, $tuitionAsst, $otherPrograms, $felony, $probation);
@@ -17,6 +21,48 @@ function renderAppSummary($conn, $appid, $userid) {
 	mysqli_stmt_close($sql);
 	if($gotResults) {
 		//do output
+		//new application
+		echo "<h2>New Application</h2>\n";
+		echo "<table cellpadding='10'>";
+		makeSummaryEntry("Which type of student are you?", $studentType);
+		makeSummaryEntry("Which college are you applying to?", $college);
+		makeSummaryEntry("What type of degree are you applying for?", $degType);
+		makeSummaryEntry("Which term are you applying for?", $termSeason . " " . $termYear);
+		echo "</table>\n";
+		
+		//personal info
+		echo "<h2>Personal Information</h2>\n";
+		echo "<table cellpadding='10'>";
+		makeSummaryEntry("First name:", $fName);
+		makeSummaryEntry("Last name:", $lName);
+		makeSummaryEntry("Preferred name:", $prefName);
+		//make date back to day/month/year
+		$ymd = explode("-", $dob);
+		makeSummaryEntry("Date of birth:", join("/", array_reverse($ymd)));
+		makeSummaryEntry("Street address:", $addr);
+		makeSummaryEntry("City:", $city);
+		makeSummaryEntry("State", $state);
+		makeSummaryEntry("Zip code:", $zip);
+		makeSummaryEntry("Phone number:", $phone);
+		makeSummaryEntry("Are you a US Citizen?", $usCitizen);
+		makeSummaryEntry("Is English your native language?", $engNative);
+		makeSummaryEntry("What is your gender?", $gender);
+		makeSummaryEntry("What is your veteran status?", $vetStatus);
+		makeSummaryEntry("If applicable, which military branch(es) have you served for (select all that apply)?", null); //query for branches list
+		makeSummaryEntry("Are you Hispanic/Latino origin?", $hispLat);
+		makeSummaryEntry("Which race/ethnicity do you identify as (select all that apply)?", null); //query for races
+		echo "</table>\n";
+		
+		//application info
+		echo "<h2>Application Info</h2>\n";
+		echo "<table cellpadding='10'>";
+		makeSummaryEntry("Will you be applying for financial aid?", $finAid);
+		makeSummaryEntry("Do you have employer tuition assistance?", $tuitionAsst);
+		makeSummaryEntry("Are you applying to other programs?", $otherPrograms);
+		makeSummaryEntry("Have you ever been convicted of a felony or a gross misdemeanor?", $felony);
+		makeSummaryEntry("Have you ever been placed on probation, suspended from, dismissed from or <br/>" .
+			"otherwise sanctioned by (for any period of time) any higher education institution", $probation);
+		echo "</table>\n";
 	}
 	else {
 		//no results; either app doesn't exist or someone is trying to hax
